@@ -1,27 +1,34 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>
-      List
-    </ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="secondary" class="toolbar">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>List</ion-title>
+    </ion-toolbar>
 </ion-header>
-
-<ion-content>
-  <ion-list>
-    <ion-item *ngFor="let item of items">
-      <ion-icon [name]="item.icon" slot="start"></ion-icon>
-      {{item.title}}
-      <div class="item-note" slot="end">
-        {{item.note}}
-      </div>
-    </ion-item>
-  </ion-list>
-  <!--
-    <div *ngIf="selectedItem" padding>
-      You navigated here from <b>{{selectedItem.title }}</b>
-    </div>
-  -->
+<ion-content color="dark" padding>
+    <ion-grid>
+        <ion-row>
+            <ion-col padding text-center>
+                <h2>Hello World!</h2>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col offset="1" size="10">
+                <ion-card color="danger">
+                    <ion-card-content text-center padding>
+                        Lorem Ipsum Et quia Mesopotamiae tractus omnes crebro inquietari sueti praetenturis et
+                        stationibus servabantur agrariis, laevorsum flexo itinere Osdroenae subsederat extimas partes,
+                        novum parumque aliquando temptatum commentum adgressus. quod si impetrasset, fulminis modo
+                        cuncta vastarat. erat autem quod cogitabat huius modi.
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>
+<ion-footer>
+    <ion-toolbar color="dark" class="footer" text-center>
+        <ion-title>Copyright All right reserved</ion-title>
+    </ion-toolbar>
+</ion-footer>
