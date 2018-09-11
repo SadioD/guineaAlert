@@ -18,5 +18,6 @@
             </ion-list>
         </ion-content>
     </ion-menu>
-    <ion-router-outlet main></ion-router-outlet>
+    <ion-router-outlet main *ngIf = "isAuth()"></ion-router-outlet>
 </ion-split-pane>
+<app-auth *ngIf = "!isAuth()"></app-auth>
