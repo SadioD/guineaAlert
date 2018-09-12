@@ -4,22 +4,20 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
-  templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.scss']
+  templateUrl: './auth.page.html',
+  styleUrls: ['./auth.page.scss'],
 })
-export class AuthComponent implements OnInit {
-    // VARIABLES + CONSTR + ONINIT ------------------------------------------------------------------------------------------------------
+export class AuthPage implements OnInit {
+    // VARIABLES +  CONSTR + INIT -------------------------------------------------------------------------------------------------------
     constructor(private authService: AuthService, private router: Router) { }
 
     ngOnInit() {
     }// ---------------------------------------------------------------------------------------------------------------------------------
-    // METHODES --------------------------------------------------------------------------------------------------------------------------
+    // METHODES -------------------------------------------------------------------------------------------------------------------------
     // Authentifie l'User
     onLogIn() {
         this.authService.logUserIn().then(() => {
-            //this.router.navigate(['/home']);
-            //console.log('yes');
+            this.router.navigate(['/home']);
         });
-        
     }// ---------------------------------------------------------------------------------------------------------------------------------
 }

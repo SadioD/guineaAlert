@@ -2,13 +2,13 @@
     <ion-menu>
         <ion-header>
             <ion-toolbar color="secondary">
-                <ion-title color = "danger">Alert APP</ion-title>
+                <ion-title color="danger">Alert APP</ion-title>
             </ion-toolbar>
         </ion-header>
         <ion-content color="secondary">
-            <ion-list>
+            <ion-list *ngIf="isLoggedIn(); else loggedOut">
                 <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
-                    <ion-item [routerDirection]="'root'" [routerLink]="[p.url]" class = "menuItem">
+                    <ion-item [routerDirection]="'root'" [routerLink]="[p.url]" class="menuItem">
                         <ion-icon slot="start" [name]="p.icon"></ion-icon>
                         <ion-label>
                             {{p.title}}
@@ -16,8 +16,19 @@
                     </ion-item>
                 </ion-menu-toggle>
             </ion-list>
+            <ng-template #loggedOut>
+                <ion-list>
+                    <ion-menu-toggle auto-hide="false">
+                        <ion-item [routerDirection]="'root'" [routerLink]="['/authentification']" class="menuItem">
+                            <ion-icon slot="start" name="log-in"></ion-icon>
+                            <ion-label>
+                                Connexion
+                            </ion-label>
+                        </ion-item>
+                    </ion-menu-toggle>
+                </ion-list>
+            </ng-template>
         </ion-content>
     </ion-menu>
-    <ion-router-outlet main *ngIf = "isAuth()"></ion-router-outlet>
+    <ion-router-outlet main></ion-router-outlet>
 </ion-split-pane>
-<app-auth *ngIf = "!isAuth()"></app-auth>

@@ -33,7 +33,7 @@ export class AppViewComponent implements OnInit, OnDestroy {
     }// ---------------------------------------------------------------------------------------------------------------------------------
     // METHODES + DESTROY ----------------------------------------------------------------------------------------------------------------
     // Vérifie l'état de connexion de l'user
-    isAuth() {
+    isLoggedIn() {
         return this.user.status;
     }
     // On Destroy
