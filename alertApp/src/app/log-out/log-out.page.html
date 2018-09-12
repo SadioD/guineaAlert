@@ -1,0 +1,30 @@
+<!-- Toolbar -->
+<ion-header>
+    <ion-toolbar color="secondary" class="toolbar">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Déconnexion</ion-title>
+    </ion-toolbar>
+</ion-header>
+<!-- Page content -->
+<ion-content color="dark" padding>
+    <ion-grid>
+        <ion-row>
+            <ion-col padding text-center>
+                <h2>Vous déconnecter ?</h2>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col padding text-center>
+                <ion-button color="primary" (click)="onLogOut()">Déconnexion</ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+<!-- Footer -->
+<ion-footer>
+    <ion-toolbar color="dark" class="footer" text-center>
+        <ion-title>Copyright All right reserved</ion-title>
+    </ion-toolbar>
+</ion-footer>

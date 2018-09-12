@@ -19,12 +19,31 @@ export class AuthService {
     emitUserSubject() {
         this.userSubject.next(this.user);
     }
+    // Vérifie l'authentification de l'User
+    isAuth() {
+        return new Promise<boolean>((resolve, reject) => {
+            resolve(this.user.status);
+        });
+    }
     // Authentifie l'User
     logUserIn() {
         return new Promise<boolean>((resolve, reject) => {
             this.user.status = true;
             this.emitUserSubject();
 
+            // A suuprimer (juste pour simuler l'appel API)
+            setTimeout(() => {
+                resolve(true);
+            }, 1000);
+        });
+    }
+    // Déconnecte l'User
+    logUserOut() {
+        return new Promise<boolean>((resolve, reject) => {
+            this.user.status = false;
+            this.emitUserSubject();
+
+            // A suuprimer (juste pour simuler l'appel API)
             setTimeout(() => {
                 resolve(true);
             }, 1000);
