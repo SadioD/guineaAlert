@@ -12,9 +12,9 @@ export class AppViewComponent implements OnInit, OnDestroy {
     user: any;
     userSubscription: Subscription;
     public appPages = [
-        { title: 'Home'      ,  url: '/home'        , icon: 'home' },
-        { title: 'Paramètres',  url: '/settings'    , icon: 'cog' },
-        { title: 'Déconnexion', url: '/logOut'      , icon: 'log-out' }
+        { title: 'Accueil'      ,  url: '/home'        , icon: 'home' },
+        { title: 'Paramètres'   ,  url: '/settings'    , icon: 'cog' },
+        { title: 'Déconnexion'  , url: '/logOut'       , icon: 'log-out' }
     ];
 
     // Injection de services dans le constructeur
