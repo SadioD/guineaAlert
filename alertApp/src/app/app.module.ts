@@ -16,13 +16,11 @@ import { AuthService } from './services/auth.service';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppViewComponent } from './app-view/app-view.component';
-import { AuthComponent } from './auth/auth.component';
 
 @NgModule({
   declarations: [
       AppComponent,
-      AppViewComponent,
-      AuthComponent],
+      AppViewComponent],
   entryComponents: [],
   imports: [
     BrowserModule,

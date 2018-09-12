@@ -4,7 +4,7 @@
         <ion-buttons slot="start">
             <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-title>Home</ion-title>
+        <ion-title>Authentification</ion-title>
     </ion-toolbar>
 </ion-header>
 <!-- Page content -->
@@ -12,7 +12,7 @@
     <ion-grid>
         <ion-row>
             <ion-col padding text-center>
-                <h2>Hello World!</h2>
+                <h2>Connexion | Inscription</h2>
             </ion-col>
         </ion-row>
         <ion-row>
@@ -27,9 +27,14 @@
                 </ion-card>
             </ion-col>
         </ion-row>
+        <ion-row>
+            <ion-col padding text-center>
+                <ion-button color="primary" (click) = "onLogIn()">Connexion</ion-button>
+            </ion-col>
+        </ion-row>
     </ion-grid>
 </ion-content>
-<!-- Footer -->
+<!-- Page content -->
 <ion-footer>
     <ion-toolbar color="dark" class="footer" text-center>
         <ion-title>Copyright All right reserved</ion-title>
