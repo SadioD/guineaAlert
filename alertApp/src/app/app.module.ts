@@ -12,6 +12,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 // Services
 import { AuthService } from './services/auth.service';
 import { AuthGuardService } from './services/auth-guard.service';
+import { SettingsService } from './services/settings.service';
 
 // Components
 import { AppComponent } from './app.component';
@@ -34,7 +35,8 @@ import { AppViewComponent } from './app-view/app-view.component';
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AuthService,
-    AuthGuardService
+    AuthGuardService,
+    SettingsService
   ],
   bootstrap: [AppComponent]
 })

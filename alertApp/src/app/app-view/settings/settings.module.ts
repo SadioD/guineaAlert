@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 
 import { SettingsPage } from './settings.page';
 
+
 @NgModule({
   imports: [
     CommonModule,

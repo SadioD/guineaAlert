@@ -1,16 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
     // VARIABLES + CONSTR -----------------------------------------------------------------------------------------------------------------
-    userSubject = new Subject<Object>();
-    private user: any = {
-        pseudo: 'John DOE',
-        status: false
-    };
+    userSubject = new Subject<User>();
+    private user: User = new User(1, 'John DOE', 'abc@yahoo.fr', false);
 
     constructor() {
     }// ------------------------------------------------------------------------------------------------------------------------------------

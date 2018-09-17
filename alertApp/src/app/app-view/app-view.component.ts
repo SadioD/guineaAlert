@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Subscription } from 'rxjs';
+import { User } from '../models/user';
 
 @Component({
     selector: 'app-app-view',
@@ -9,12 +10,12 @@ import { Subscription } from 'rxjs';
 })
 export class AppViewComponent implements OnInit, OnDestroy {
     // VARIABLES + PAGES de l'APP + CONSTR + INIT ----------------------------------------------------------------------------------------
-    user: any;
+    user: User;
     userSubscription: Subscription;
     public appPages = [
         { title: 'Accueil'      ,  url: '/home'        , icon: 'home' },
         { title: 'Paramètres'   ,  url: '/settings'    , icon: 'cog' },
-        { title: 'Déconnexion'  , url: '/logOut'       , icon: 'log-out' }
+        { title: 'Déconnexion'  ,  url: '/logOut'      , icon: 'log-out' }
     ];
 
     // Injection de services dans le constructeur
@@ -23,7 +24,7 @@ export class AppViewComponent implements OnInit, OnDestroy {
     // Initialisation de l'App en liant l'User au subject du Service AuthService
     ngOnInit() {
         this.userSubscription = this.authService.userSubject.subscribe(
-            (sessionUser: Object) => {
+            (sessionUser: User) => {
                 this.user = sessionUser;
             },
             (error) => {

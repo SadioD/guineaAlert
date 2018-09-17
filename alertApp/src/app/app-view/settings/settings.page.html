@@ -1,3 +1,4 @@
+<!-- Toolbar -->
 <ion-header>
     <ion-toolbar color="secondary" class="toolbar">
         <ion-buttons slot="start">
@@ -6,29 +7,14 @@
         <ion-title>Paramètres</ion-title>
     </ion-toolbar>
 </ion-header>
-<ion-content color="dark" padding>
-    <ion-grid>
-        <ion-row>
-            <ion-col padding text-center>
-                <h2>Hello brave new World!</h2>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col offset="1" size="10">
-                <ion-card color="danger">
-                    <ion-card-content text-center padding>
-                        Lorem Ipsum Et quia Mesopotamiae tractus omnes crebro inquietari sueti praetenturis et
-                        stationibus servabantur agrariis, laevorsum flexo itinere Osdroenae subsederat extimas partes,
-                        novum parumque aliquando temptatum commentum adgressus. quod si impetrasset, fulminis modo
-                        cuncta vastarat. erat autem quod cogitabat huius modi.
-                    </ion-card-content>
-                </ion-card>
-            </ion-col>
-        </ion-row>
-    </ion-grid>
+<!-- Page content -->
+<ion-content color="dark" padding-top>
+    <ion-list>
+        <ion-item color="dark" class="setItem" *ngFor="let item of settings">
+            <ion-label>
+                <h2>{{item.name}}</h2>
+                <p>{{item.shortDesc}}</p>
+            </ion-label>
+        </ion-item>
+    </ion-list>
 </ion-content>
-<ion-footer>
-    <ion-toolbar color="dark" class="footer" text-center>
-        <ion-title>Copyright All right reserved</ion-title>
-    </ion-toolbar>
-</ion-footer>
