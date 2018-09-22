@@ -1,0 +1,22 @@
+// Toolbar
+.toolbar {
+    color: var(--ion-color-danger);
+}
+
+// Card (header + content)
+.cardHeader {
+    background: var(--ion-color-medium);
+    color: white;
+    font-weight: bold;
+}
+.cardContent {
+    background: var(--ion-color-danger);
+}
+.submitButton {
+    color: white;
+    font-weight: bold;
+}
+// Liste des controls du formulaire
+.formList {
+    background: rgb(236, 142, 142)
+}

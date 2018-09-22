@@ -1,0 +1,58 @@
+<!-- Toolbar -->
+<ion-header>
+    <ion-toolbar color="secondary" class="toolbar">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Settings</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<!-- Page content -->
+<ion-content color="dark">
+    <ion-grid>
+        <ion-row>
+            <ion-col padding text-justify>
+                <p>
+                    Vous devez définir au moins une personne à contacter, en cas d'urgence.
+                </p>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-card>
+                    <ion-card-header text-center class="cardHeader">PERSONNES A CONTACTER</ion-card-header>
+                    <ion-card-content text-center padding class="cardContent">
+                        <form #pacForm="ngForm" (ngSubmit)="onSubmit(pacForm)">
+                            <ion-list class="formList">
+                                <ion-item>
+                                    <ion-label position="floating"><strong>Prénom*</strong></ion-label>
+                                    <ion-input type="text" pattern="[a-zA-Z]{1,}" 
+                                               name="pseudo" id="pseudo" ngModel [required]="pacForm.dirty && pacForm.touched"></ion-input>
+                                </ion-item>
+                                <ion-item>
+                                    <ion-label position="floating"><strong>Nom*</strong></ion-label>
+                                    <ion-input type="text"    pattern="[a-zA-Z]{1,}" 
+                                               name="firstName" id="firstName" ngModel [required]="pacForm.dirty && pacForm.touched"></ion-input>
+                                </ion-item>
+                                <ion-item>
+                                    <ion-label position="floating"><strong>Téléphone*</strong></ion-label>
+                                    <ion-input type="tel" pattern="6[2-5-6][0-9]{7}" 
+                                               name="tel" id="tel" ngModel [required]="pacForm.dirty && pacForm.touched"></ion-input>
+                                </ion-item>
+                            </ion-list>
+                            <ion-row>
+                                <ion-col padding-top>
+                                    <ion-button expand="block" type="submit" class="submitButton" color="medium" [disabled]="pacForm.invalid">
+                                        <ion-icon slot="start" name="add-circle" color="light"></ion-icon>
+                                        Ajouter
+                                    </ion-button>
+                                </ion-col>
+                            </ion-row>
+                        </form>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

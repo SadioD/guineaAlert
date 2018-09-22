@@ -5,12 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { SingleSetPage } from './single-set.page';
+import { PacSetPage } from './pac-set.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: SingleSetPage
+    component: PacSetPage
   }
 ];
 
@@ -21,6 +21,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [SingleSetPage]
+  declarations: [PacSetPage]
 })
-export class SingleSetPageModule {}
+export class PacSetPageModule {}

@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SingleSetPage } from './single-set.page';
+import { PacSetPage } from './pac-set.page';
 
-describe('SingleSetPage', () => {
-  let component: SingleSetPage;
-  let fixture: ComponentFixture<SingleSetPage>;
+describe('PacSetPage', () => {
+  let component: PacSetPage;
+  let fixture: ComponentFixture<PacSetPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SingleSetPage ],
+      declarations: [ PacSetPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SingleSetPage);
+    fixture = TestBed.createComponent(PacSetPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
