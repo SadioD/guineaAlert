@@ -1,0 +1,18 @@
+// Toolbar AND Footer
+.toolbar {
+    color: var(--ion-color-danger);
+}
+
+.footer {
+    color: rgba(230, 132, 132, 0.4);
+    font-size: 15%;
+}
+// Card
+.cardHeader {
+    background: var(--ion-color-danger);
+    color: white;
+    font-weight: bold;
+}
+/*.cardContent {
+    background: var(--ion-color-danger);
+}*/

@@ -10,15 +10,15 @@ import { SettingsService } from '../../../services/settings.service';
 })
 export class SettingsPage implements OnInit, OnDestroy {
     // VARIABLES + CONSTR -----------------------------------------------------------------------------------------------------------------
-    settings: Settings[];
+    settings: {};
     settingSubscription: Subscription;
 
     constructor(private settingService: SettingsService) { }
 
     ngOnInit() {
        this.settingSubscription = this.settingService.settingSubject.subscribe(
-           (settingsList: Settings[]) => {
-               this.settings = settingsList;
+           (settingsList: Settings) => {
+               this.settings = settingsList.data;
            },
            (error) => {
                 console.log(error);
