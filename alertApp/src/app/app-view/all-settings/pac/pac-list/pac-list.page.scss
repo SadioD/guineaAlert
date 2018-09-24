@@ -7,12 +7,15 @@
     color: rgba(230, 132, 132, 0.4);
     font-size: 15%;
 }
-// Card
-.cardHeader {
+// Card Header
+.pacCardHeader {
     background: var(--ion-color-danger);
-    color: white;
     font-weight: bold;
 }
-/*.cardContent {
-    background: var(--ion-color-danger);
-}*/
+// Card Content
+.pacCols, .pacCols p a {
+    color: white;
+}
+.pacRows {
+    border-bottom: 1px solid rgb(34, 34, 34);
+}

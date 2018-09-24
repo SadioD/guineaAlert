@@ -5,6 +5,9 @@
             <ion-menu-button></ion-menu-button>
         </ion-buttons>
         <ion-title>Modifier la PAC</ion-title>
+        <ion-buttons slot="end">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
@@ -43,7 +46,7 @@
                             </ion-list>
                             <ion-row>
                                 <ion-col padding-top>
-                                    <ion-button expand="block" type="submit" class="submitButton" color="medium" [disabled]="pacForm.invalid">
+                                    <ion-button expand="block" type="submit" id="submitButton" color="medium" [disabled]="pacForm.invalid">
                                         <ion-icon slot="start" name="add-circle" color="light"></ion-icon>
                                         Ajouter
                                     </ion-button>
