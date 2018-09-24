@@ -5,18 +5,23 @@
 
 // Card (header + content)
 .cardHeader {
-    background: var(--ion-color-medium);
-    color: white;
+    background: var(--ion-color-danger);
     font-weight: bold;
 }
 .cardContent {
-    background: var(--ion-color-danger);
-}
-#submitButton {
-    color: white;
-    font-weight: bold;
+    background: var(--ion-color-dark-shade);
 }
 // Liste des controls du formulaire
 .formList {
-    background: rgb(236, 142, 142)
+    background: var(--ion-color-dark-shade);
+}
+.formLabel{
+    color: var(--ion-color-danger);
+}
+.formInput {
+    background: #2a2a2a;
+    color: white;
+}
+.formLabel {
+    z-index: 10000000;
 }

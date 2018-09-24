@@ -14,7 +14,7 @@ export class AppViewComponent implements OnInit, OnDestroy {
     userSubscription: Subscription;
     public appPages = [
         { title: 'Accueil'      ,  url: '/home'        , icon: 'home' },
-        { title: 'Paramètres'   ,  url: '/settings'    , icon: 'cog' },
+        { title: 'Paramètres'   ,  url: '/settings'    , icon: 'settings' },
         { title: 'Déconnexion'  ,  url: '/logOut'      , icon: 'log-out' }
     ];
 

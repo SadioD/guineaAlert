@@ -17,7 +17,7 @@
         <ion-row>
             <ion-col padding text-justify>
                 <p>
-                    Vous devez définir au moins une personne à contacter, en cas d'urgence.
+                    Vous devez remplir tous les champs pour valider le formulaire.
                 </p>
             </ion-col>
         </ion-row>
@@ -29,26 +29,26 @@
                         <form #pacForm="ngForm" (ngSubmit)="onSubmit(pacForm)">
                             <ion-list class="formList">
                                 <ion-item>
-                                    <ion-label position="floating"><strong>Prénom*</strong></ion-label>
-                                    <ion-input type="text" pattern="[a-zA-Z]{1,}" 
+                                    <ion-label position="floating" class="formLabel"><strong>Prénom*</strong></ion-label>
+                                    <ion-input type="text" pattern="[a-zA-Z]{1,}" class="formInput"
                                                name="pseudo" id="pseudo" ngModel [required]="pacForm.dirty && pacForm.touched"></ion-input>
                                 </ion-item>
                                 <ion-item>
-                                    <ion-label position="floating"><strong>Nom*</strong></ion-label>
-                                    <ion-input type="text"    pattern="[a-zA-Z]{1,}" 
+                                    <ion-label position="floating" class="formLabel"><strong>Nom*</strong></ion-label>
+                                    <ion-input type="text"    pattern="[a-zA-Z]{1,}" class="formInput"
                                                name="firstName" id="firstName" ngModel [required]="pacForm.dirty && pacForm.touched"></ion-input>
                                 </ion-item>
                                 <ion-item>
-                                    <ion-label position="floating"><strong>Téléphone*</strong></ion-label>
-                                    <ion-input type="tel" pattern="6[2-5-6][0-9]{7}" 
+                                    <ion-label position="floating" class="formLabel"><strong>Téléphone*</strong></ion-label>
+                                    <ion-input type="tel" pattern="6[2-5-6][0-9]{7}" class="formInput"
                                                name="tel" id="tel" ngModel [required]="pacForm.dirty && pacForm.touched"></ion-input>
                                 </ion-item>
                             </ion-list>
                             <ion-row>
                                 <ion-col padding-top>
-                                    <ion-button expand="block" type="submit" id="submitButton" color="medium" [disabled]="pacForm.invalid">
-                                        <ion-icon slot="start" name="add-circle" color="light"></ion-icon>
-                                        Ajouter
+                                    <ion-button expand="block" type="submit" id="submitButton" color="danger" [disabled]="pacForm.invalid">
+                                        <ion-icon slot="start" name="add-circle"></ion-icon>
+                                        <strong>Enregistrer</strong>
                                     </ion-button>
                                 </ion-col>
                             </ion-row>

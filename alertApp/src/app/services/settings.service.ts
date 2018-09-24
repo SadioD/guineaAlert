@@ -26,6 +26,11 @@ export class SettingsService {
                 firstName: 'BAH-DIALLO',
                 pseudo: 'Hope Binta',
                 tel: 622221239
+            },
+            {
+                firstName: 'BAH',
+                pseudo: 'Thierno Aliou',
+                tel: 622221239
             }
         ]
     });

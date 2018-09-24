@@ -35,7 +35,7 @@ export class PacSetPage implements OnInit {
                 // Customise la couleur des labels lors du focus
                 styleForm: function () {
                     $('#pseudo, #firstName, #tel').focus(function (e) {
-                        $(e.target).prev().css('color', 'black');
+                        $(e.target).prev().css('color', '#e68484');
                     });
                 },
                 // initialise le script

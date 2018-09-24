@@ -9,8 +9,10 @@
 </ion-header>
 <!-- Page content -->
 <ion-content color="dark" padding-top>
-    <ion-card id="pacCard">
-        <ion-card-header text-center class="pacCardHeader">PERSONNES A CONTACTER</ion-card-header>
+    <ion-card padding-top>
+        <ion-card-header text-justify class="pacCardHeader">
+            Pour modifier, supprimer ou ajouter une personne à contacter, Appuyez sur le bouton adapté.
+        </ion-card-header>
         <ion-card-content text-center padding class="pacCardContent">
             <ion-row class="pacRows" *ngFor="let pac of user.pacList; let i = index">
                 <ion-col size=5 class="pacCols" text-left>
@@ -19,20 +21,20 @@
                 <ion-col offset=3 size=4 class="pacCols" text-right>
                     <p>
                         <a routerLink="/settings/pac-list/{{i}}" routerDirection="forward">
-                            <ion-icon slot="start" name="log-in"></ion-icon>
+                            <ion-icon slot="start" name="create"></ion-icon>
                         </a> 
                         <span style="color:var(--ion-color-danger); font-size:140%;"> | </span>
                         <a href="">
-                            <ion-icon name="log-out"></ion-icon>
+                            <ion-icon name="trash"></ion-icon>
                         </a>
                     </p>
                 </ion-col>
             </ion-row>
-            <ion-row>
-                <ion-col class="pacCols">
-                    <ion-button expand="block" type="submit" class="submitButton" color="danger">
+            <ion-row padding-top>
+                <ion-col class="pacCols" padding-top>
+                    <ion-button expand="block" type="submit" id="addButton" color="danger">
                         <ion-icon slot="start" name="add-circle"></ion-icon>
-                        Ajouter
+                        <strong>Ajouter</strong>
                     </ion-button>
                 </ion-col>
             </ion-row>

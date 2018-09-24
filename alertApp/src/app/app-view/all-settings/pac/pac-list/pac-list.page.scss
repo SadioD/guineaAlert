@@ -10,12 +10,17 @@
 // Card Header
 .pacCardHeader {
     background: var(--ion-color-danger);
-    font-weight: bold;
 }
 // Card Content
+.pacCardContent {
+    background: var(--ion-color-dark-shade);
+}
 .pacCols, .pacCols p a {
     color: white;
 }
 .pacRows {
-    border-bottom: 1px solid rgb(34, 34, 34);
+    border-bottom: 1px solid rgb(39, 39, 39);
+}
+#addButton  {
+    box-shadow: 0px 1.3px 1.6px 0px black;
 }
