@@ -1,0 +1,27 @@
+// Flash message de l'App 
+.redFlashMessage {
+    .toast-container {
+        background: rgba(86, 3, 3, 0.449);
+        font-size: 85%;
+    }
+    .toast-button {
+        background: red; 
+        border-radius: 3px; 
+        margin-right: 5px; 
+        font-size: 95%;
+    }
+}
+
+.greenFlashMessage {
+    .toast-container {
+        background: rgba(2, 62, 2, 0.442);
+        font-size: 85%;
+    }
+    .toast-button {
+        background: green; 
+        border-radius: 3px; 
+        margin-right: 5px; 
+        font-size: 95%;
+    }
+}
+

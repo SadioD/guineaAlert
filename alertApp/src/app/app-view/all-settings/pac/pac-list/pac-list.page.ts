@@ -1,7 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ToastController } from '@ionic/angular';
 import { UserSettings } from '../../../../models/user-settings';
-import { Subscription } from 'rxjs';
 import { SettingsService } from '../../../../services/settings.service';
+import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pac-list',
@@ -13,7 +15,9 @@ export class PacListPage implements OnInit, OnDestroy {
     user: {};
     userSetSubscription: Subscription;
 
-    constructor(private settingService: SettingsService) { }
+    constructor(private settingService: SettingsService,
+                private toastController: ToastController,
+                private router: Router) { }
 
     ngOnInit() {
         this.userSetSubscription = this.settingService.userSettingSubject.subscribe(
@@ -22,7 +26,7 @@ export class PacListPage implements OnInit, OnDestroy {
             },
             (error) => {
                 console.log(error);
-                alert('Oups... Une erreur est survenue! Merci de rafraichir la page. Si ce problème persiste n\'hésitez pas nous contacter');
+                this.displayFlash('Oups... Une erreur est survenue! Merci de rafraichir la page. Si ce problème persiste n\'hésitez pas nous contacter', 'redFlashMessage');
             }
         );
         this.settingService.emitUserSetSubject();
@@ -32,5 +36,31 @@ export class PacListPage implements OnInit, OnDestroy {
         this.userSetSubscription.unsubscribe();
     }// ---------------------------------------------------------------------------------------------------------------------------------
     // METHODES -------------------------------------------------------------------------------------------------------------------------
-
+    // Supprime un PAC
+    deletePAC(pacPseudo: string, index: string) {
+        this.settingService.deletePAC(+index).then(() => {
+            this.displayFlash(pacPseudo + ' a bien été supprimé(e)', 'greenFlashMessage');
+        });
+    }
+    // Ajoute un PAC si le nombre total de PAC du USer est < 3
+    onAddPAC() {
+        if (sessionStorage.getItem('numberOfPAC') >= '3') {
+            this.displayFlash('Vous avez atteint le nombre maximum de PAC', 'redFlashMessage');
+        } else {
+            return this.router.navigate(['/settings/pac-list/new-pac']);
+        }
+    }// ---------------------------------------------------------------------------------------------------------------------------------
+    // EVITE DUPLICATION CODE /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Affiche un Message flash ----------------------------------------------------------------------------------------------------------
+    displayFlash(message: string, customClass: string) {
+        this.toastController.create({
+            message: message,
+            showCloseButton: true,
+            closeButtonText: 'Fermer',
+            position: 'top',
+            cssClass: customClass
+        }).then((toast: HTMLIonToastElement) => {
+            toast.present();
+        });
+    }// ---------------------------------------------------------------------------------------------------------------------------------
 }

@@ -30,23 +30,26 @@
                             <ion-list class="formList">
                                 <ion-item>
                                     <ion-label position="floating" class="formLabel"><strong>Prénom*</strong></ion-label>
-                                    <ion-input type="text" pattern="[a-zA-Z]{1,}" class="formInput"
-                                               name="pseudo" id="pseudo" ngModel [required]="pacForm.dirty && pacForm.touched"></ion-input>
+                                    <ion-input type="text" pattern="[a-zA-Zéèïç]+ ?[a-zA-Zéèï]+$" class="formInput" [ngModel]="pac.pseudo"
+                                        name="pseudo" id="pseudo" ngModel [required]="pacForm.dirty && pacForm.touched"></ion-input>
                                 </ion-item>
                                 <ion-item>
                                     <ion-label position="floating" class="formLabel"><strong>Nom*</strong></ion-label>
-                                    <ion-input type="text"    pattern="[a-zA-Z]{1,}" class="formInput"
-                                               name="firstName" id="firstName" ngModel [required]="pacForm.dirty && pacForm.touched"></ion-input>
+
+                                    <ion-input type="text" pattern="[a-zA-Zéèïç]+ ?[a-zA-Zéèïç]+$" class="formInput" [ngModel]="pac.firstName"
+                                        name="firstName" id="firstName" ngModel [required]="pacForm.dirty && pacForm.touched"></ion-input>
                                 </ion-item>
                                 <ion-item>
                                     <ion-label position="floating" class="formLabel"><strong>Téléphone*</strong></ion-label>
-                                    <ion-input type="tel" pattern="6[2-5-6][0-9]{7}" class="formInput"
-                                               name="tel" id="tel" ngModel [required]="pacForm.dirty && pacForm.touched"></ion-input>
+
+                                    <ion-input type="tel" pattern="6[2-5-6][0-9]{7}" class="formInput" [ngModel]="pac.tel"
+                                        name="tel" id="tel" ngModel [required]="pacForm.dirty && pacForm.touched"></ion-input>
                                 </ion-item>
                             </ion-list>
                             <ion-row>
                                 <ion-col padding-top>
-                                    <ion-button expand="block" type="submit" id="submitButton" color="danger" [disabled]="pacForm.invalid">
+                                    <ion-button expand="block" type="submit" id="submitButton" color="danger"
+                                        [disabled]="pacForm.invalid">
                                         <ion-icon slot="start" name="add-circle"></ion-icon>
                                         <strong>Enregistrer</strong>
                                     </ion-button>

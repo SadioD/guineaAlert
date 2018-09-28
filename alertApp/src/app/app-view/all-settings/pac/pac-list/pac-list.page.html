@@ -24,7 +24,7 @@
                             <ion-icon slot="start" name="create"></ion-icon>
                         </a> 
                         <span style="color:var(--ion-color-danger); font-size:140%;"> | </span>
-                        <a href="">
+                        <a (click)="deletePAC(pac.pseudo, i)" id="deleteButton">
                             <ion-icon name="trash"></ion-icon>
                         </a>
                     </p>
@@ -32,7 +32,7 @@
             </ion-row>
             <ion-row padding-top>
                 <ion-col class="pacCols" padding-top>
-                    <ion-button expand="block" type="submit" id="addButton" color="danger">
+                    <ion-button expand="block" type="submit" id="addButton" color="danger" (click)="onAddPAC()">
                         <ion-icon slot="start" name="add-circle"></ion-icon>
                         <strong>Ajouter</strong>
                     </ion-button>

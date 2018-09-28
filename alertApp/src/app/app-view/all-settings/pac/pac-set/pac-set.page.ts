@@ -1,27 +1,61 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SettingsService } from '../../../../services/settings.service';
+import { ToastController } from '@ionic/angular';
 // import '../../../../../assets/js/pac-set.page.js';
 
 declare var $: any;
 @Component({
-  selector: 'app-pac-set',
-  templateUrl: './pac-set.page.html',
-  styleUrls: ['./pac-set.page.scss'],
+    selector: 'app-pac-set',
+    templateUrl: './pac-set.page.html',
+    styleUrls: ['./pac-set.page.scss'],
 })
 export class PacSetPage implements OnInit {
     // VARIABLES + CONSTR + INIT + DESTROY -----------------------------------------------------------------------------------------------------------
-    constructor() { }
+    pac: any = {};
+
+    constructor(private route: ActivatedRoute,
+                private router: Router,
+                private settingService: SettingsService,
+                private toastController: ToastController) { }
 
     // Initialise les dépendances de la page
     ngOnInit() {
-       this.loadJqueryCode();
+        if (this.reqHasParam()) {
+            this.settingService.getUniquePAC(+this.route.snapshot.params['id']).then(
+                (response: {} | boolean) => {
+                    if (!response) {
+                        return this.router.navigate(['/settings/pac-list']);
+                    } else {
+                        this.pac = response;
+                    }
+                }
+            );
+        } else {
+            this.pac.pseudo = this.pac.firstName = this.pac.tel = '';
+        }
+        this.loadJqueryCode();
     }// ------------------------------------------------------------------------------------------------------------------------------------
     // METHODES ---------------------------------------------------------------------------------------------------------------------------
     // Exploite les données à la soumission du formulaire
     onSubmit(form: NgForm) {
-        console.log(form.value);
+        if (this.reqHasParam()) {
+            this.settingService.updatePAC(form.value, this.route.snapshot.params['id']).then((response: boolean) => {
+                if (response) { return this.redirectAndDisplay(form.value.pseudo + ' a bien été modifié(e)', 'greenFlashMessage'); }
+            });
+        } else {
+            this.settingService.addNewPAC(form.value).then((response: boolean) => {
+                if (response) { this.redirectAndDisplay(form.value.pseudo + ' a bien été ajouté(e)', 'greenFlashMessage'); }
+            });
+        }
+    }
+    // Premet de vérifier si l'id a été recue: si TRUE=> il s'agit d'un UPDATE si FALSE => il s'agit d'un ADD NEW
+    reqHasParam() {
+        return this.route.snapshot.params['id'] === 'new-pac' ? false : true;
     }// ------------------------------------------------------------------------------------------------------------------------------------
-    // SCRIPTS ----------------------------------------------------------------------------------------------------------------------------
+    // EVITE DUPLICATION CODE /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // --------------------------------------------------------------------------------------------------------------------------------------
     // Charge du code Jquery directement dans le typeScript (Import ne marche pas lorsqu'on ajoute le backButton)
     loadJqueryCode() {
         $(function () {
@@ -46,5 +80,19 @@ export class PacSetPage implements OnInit {
             };
             manager.loadScript();
         });
-    }// ------------------------------------------------------------------------------------------------------------------------------------
+    }
+    // Redirige et affiche un message FLash
+    redirectAndDisplay(message: string, customClass: string) {
+        return this.router.navigate(['/settings/pac-list']).then(() => {
+            this.toastController.create({
+                message: message,
+                showCloseButton: true,
+                closeButtonText: 'Fermer',
+                position: 'top',
+                cssClass: customClass
+            }).then((toast: HTMLIonToastElement) => {
+                toast.present();
+            });
+        });
+    }// ---------------------------------------------------------------------------------------------------------------------------------
 }
