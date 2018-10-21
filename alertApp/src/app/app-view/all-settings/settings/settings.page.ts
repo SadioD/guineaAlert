@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Settings } from '../../../models/settings';
+//import { Settings } from '../../../models/settings';
 import { Subscription } from 'rxjs';
 import { SettingsService } from '../../../services/settings.service';
 
@@ -17,8 +17,8 @@ export class SettingsPage implements OnInit, OnDestroy {
 
     ngOnInit() {
        this.settingSubscription = this.settingService.settingSubject.subscribe(
-           (settingsList: Settings) => {
-               this.settings = settingsList.data;
+           (userSettings: any) => {
+               this.settings = userSettings.data;
            },
            (error) => {
                 console.log(error);

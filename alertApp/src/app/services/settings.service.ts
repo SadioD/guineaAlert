@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { Settings } from '../models/settings';
+//import { Settings } from '../models/settings';
 import { UserSettings } from '../models/user-settings';
 import { User } from '../models/user';
 
@@ -19,8 +19,10 @@ export class SettingsService {
         'standard_version',  // Version de l'App download (Standard : gratuite Ou Premium : Payante)
         true
     );
-    // Table userSettings : Données Stockée au format JSON en BDD (Postgresql)
+    // Table UserSettings : Données Stockées au format JSON en BDD (Postgresql)
     // Contient la liste des paramètres de l'app et leur configuration apportée par l'User
+    // Contient également une colonne faisant référence à la clé extérieure (user_id)
+    // SELECT user_settings.info WHERE user_settings.user_id = 1
     userSettings: any = {
         list: [
             {
@@ -118,12 +120,11 @@ export class SettingsService {
         console.log('requete httpclient vers BDD');
         sessionStorage.setItem('numberOfPAC', this.userSettings.data.pacList.setup.length);
         // RequetehttpClient -> BDD if return false => displayFlash(message, redFlashMessage)
-
     }
     // Recupère une PAC en fonction de son index
     getUniquePAC(index: number) {
         return new Promise<any>((resolve) => {
-            if (!this.userSettings.data.pacList.setup.length) {
+            if (!this.userSettings.setup.pacList.length) {
                 resolve(false);
             } else {
                 resolve(this.findPAC(index));
@@ -134,9 +135,9 @@ export class SettingsService {
     updatePAC(pac: any, index: number) {
         return new Promise<boolean>((resolve) => {
             if (pac.pseudo && pac.firstName && pac.tel) {
-                this.userSettings.data.pacList.setup[index].firstName = pac.firstName;
-                this.userSettings.data.pacList.setup[index].pseudo = pac.pseudo;
-                this.userSettings.data.pacList.setup[index].tel = pac.tel;
+                this.userSettings.setup.pacList[index].firstName = pac.firstName;
+                this.userSettings.setup.pacList[index].pseudo = pac.pseudo;
+                this.userSettings.setup.pacList[index].tel = pac.tel;
 
                 // Requete httpClient -> update BDD if return false => displayFlash(message, redFlashMessage)
 
@@ -152,13 +153,13 @@ export class SettingsService {
     addNewPAC(pac: any) {
         return new Promise<boolean>((resolve) => {
             if (pac.pseudo && pac.firstName && pac.tel) {
-                this.userSettings.data.pacList.setup.push(pac);
+                this.userSettings.setup.pacList.push(pac);
 
                 // Requete httpClient -> BDD if return false => displayFlash(message, redFlashMessage)
 
                 // On émet la mise à jour et reout la requête
                 this.emitUserSetSubject();
-                sessionStorage.setItem('numberOfPAC', this.userSettings.data.pacList.setup.length);
+                sessionStorage.setItem('numberOfPAC', this.userSettings.setup.pacList.length);
                 resolve(true);
             } else {
                 resolve(false);
@@ -168,18 +169,18 @@ export class SettingsService {
     // Supprime un PAC
     deletePAC(index: number) {
         return new Promise<boolean>((resolve) => {
-            this.userSettings.data.pacList.setup.splice(index, 1);
+            this.userSettings.setup.pacList.splice(index, 1);
             // Requete httpClient -> BDD if return false => displayFlash(message, redFlashMessage)
 
             // On émet la mise à jour et resolve la requête
             this.emitUserSetSubject();
-            sessionStorage.setItem('numberOfPAC', this.userSettings.data.pacList.setup.length);
+            sessionStorage.setItem('numberOfPAC', this.userSettings.setup.pacList.length);
             resolve(true);
         });
     }// ------------------------------------------------------------------------------------------------------------------------------------
     // EVITE DUPLICATION CODE /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Permet de trouver une machine dans la liste d'Array ----------------------------------------------------------------------------------------
     findPAC(index: number) {
-        return this.userSettings.data.pacList.setup[index];
+        return this.userSettings.setup.pacList[index];
     }// ------------------------------------------------------------------------------------------------------------------------------------
 }
