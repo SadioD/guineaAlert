@@ -1,24 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 //import { Settings } from '../models/settings';
-import { UserSettings } from '../models/user-settings';
-import { User } from '../models/user';
+//import { UserSettings } from '../models/user-settings';
 
 @Injectable({
     providedIn: 'root'
 })
 export class SettingsService {
     // VARIABLES + CONSTR -----------------------------------------------------------------------------------------------------------------
-    // Table User (avec les infos personnelles du User)
-    user: User = new User(
-        1,
-        'Ahmed',
-        'DIALLO',
-        'dialloamadou1@yahoo.fr',
-        '********',
-        'standard_version',  // Version de l'App download (Standard : gratuite Ou Premium : Payante)
-        true
-    );
     // Table UserSettings : Données Stockées au format JSON en BDD (Postgresql)
     // Contient la liste des paramètres de l'app et leur configuration apportée par l'User
     // Contient également une colonne faisant référence à la clé extérieure (user_id)
@@ -93,9 +82,9 @@ export class SettingsService {
             icon: 'cog'
         },
     ]);*/
-    // Les Subjects (Settings référencés[name, short/long Desc, etc.] + Settings que l'user a saved[PAC, raccourcis alert icones, etc.])
-    // settingSubject = new Subject<Settings>();
-    userSettingSubject = new Subject<UserSettings>();
+
+    // Le Subject de la variable userSettings
+    userSettingSubject = new Subject<any>();
 
     constructor() {
         // this.getAppSettings();
@@ -124,24 +113,21 @@ export class SettingsService {
     // Recupère une PAC en fonction de son index
     getUniquePAC(index: number) {
         return new Promise<any>((resolve) => {
-            if (!this.userSettings.setup.pacList.length) {
-                resolve(false);
-            } else {
-                resolve(this.findPAC(index));
-            }
+            resolve(this.userSettings.setup.pacList[index]);
         });
     }
     // Modifie un PAC
     updatePAC(pac: any, index: number) {
-        return new Promise<boolean>((resolve) => {
+        return new Promise<boolean>((resolve, reject) => {
             if (pac.pseudo && pac.firstName && pac.tel) {
                 this.userSettings.setup.pacList[index].firstName = pac.firstName;
                 this.userSettings.setup.pacList[index].pseudo = pac.pseudo;
                 this.userSettings.setup.pacList[index].tel = pac.tel;
 
-                // Requete httpClient -> update BDD if return false => displayFlash(message, redFlashMessage)
+                /* Requete httpClient -> update BDD if return false =
+                    If(!response) => console.log(error); reject(error) */
 
-                // On émet la mise à jour et reout la requête
+                // On émet la mise à jour et resout la promise
                 this.emitUserSetSubject();
                 resolve(true);
             } else {
@@ -151,11 +137,11 @@ export class SettingsService {
     }
     // Ajoute un PAC
     addNewPAC(pac: any) {
-        return new Promise<boolean>((resolve) => {
+        return new Promise<boolean>((resolve, reject) => {
             if (pac.pseudo && pac.firstName && pac.tel) {
                 this.userSettings.setup.pacList.push(pac);
 
-                // Requete httpClient -> BDD if return false => displayFlash(message, redFlashMessage)
+                // Requete httpClient -> BDD if return false => console.log(error); reject(error)
 
                 // On émet la mise à jour et reout la requête
                 this.emitUserSetSubject();
@@ -168,9 +154,9 @@ export class SettingsService {
     }
     // Supprime un PAC
     deletePAC(index: number) {
-        return new Promise<boolean>((resolve) => {
+        return new Promise<boolean>((resolve, reject) => {
             this.userSettings.setup.pacList.splice(index, 1);
-            // Requete httpClient -> BDD if return false => displayFlash(message, redFlashMessage)
+            // Requete httpClient -> BDD if return false => console.log(error); reject(error)
 
             // On émet la mise à jour et resolve la requête
             this.emitUserSetSubject();
@@ -179,8 +165,5 @@ export class SettingsService {
         });
     }// ------------------------------------------------------------------------------------------------------------------------------------
     // EVITE DUPLICATION CODE /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // Permet de trouver une machine dans la liste d'Array ----------------------------------------------------------------------------------------
-    findPAC(index: number) {
-        return this.userSettings.setup.pacList[index];
-    }// ------------------------------------------------------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------------------------------------------------------
 }

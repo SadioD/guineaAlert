@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-//import { Settings } from '../../../models/settings';
+import { Settings } from '../../../models/settings';
 import { Subscription } from 'rxjs';
 import { SettingsService } from '../../../services/settings.service';
 
@@ -10,22 +10,24 @@ import { SettingsService } from '../../../services/settings.service';
 })
 export class SettingsPage implements OnInit, OnDestroy {
     // VARIABLES + CONSTR -----------------------------------------------------------------------------------------------------------------
-    settings: {};
+    // Liste des paramètres de l'app
+    settingsList: Array<{}>;
     settingSubscription: Subscription;
 
     constructor(private settingService: SettingsService) { }
 
     ngOnInit() {
-       this.settingSubscription = this.settingService.settingSubject.subscribe(
+        // On recupère la liste des paramètres à afficher depuis settingService
+        this.settingSubscription = this.settingService.userSettingSubject.subscribe(
            (userSettings: any) => {
-               this.settings = userSettings.data;
+               this.settingsList = userSettings.list;
            },
            (error) => {
                 console.log(error);
                 alert('Oups... Une erreur est survenue! Merci de rafraichir la page. Si ce problème persiste n\'hésitez pas nous contacter');
            }
        );
-       this.settingService.emitSettingSubject();
+       this.settingService.emitUserSetSubject();
     }// ------------------------------------------------------------------------------------------------------------------------------------
     // METHODES ---------------------------------------------------------------------------------------------------------------------------
     ngOnDestroy() {

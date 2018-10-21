@@ -14,17 +14,17 @@
             Pour modifier, supprimer ou ajouter une personne à contacter, Appuyez sur le bouton adapté.
         </ion-card-header>
         <ion-card-content text-center padding class="pacCardContent">
-            <ion-row class="pacRows" *ngFor="let pac of user.pacList; let i = index">
+            <ion-row class="pacRows" *ngFor="let pac of pacList; let i = index">
                 <ion-col size=5 class="pacCols" text-left>
                     <p>{{pac.pseudo}}</p>
                 </ion-col>
                 <ion-col offset=3 size=4 class="pacCols" text-right>
                     <p>
-                        <a routerLink="/settings/pac-list/{{i}}" routerDirection="forward">
+                        <a routerLink="/settings/pac-list/{{i}}" routerDirection="forward" title="modifier">
                             <ion-icon slot="start" name="create"></ion-icon>
                         </a> 
                         <span style="color:var(--ion-color-danger); font-size:140%;"> | </span>
-                        <a (click)="deletePAC(pac.pseudo, i)" id="deleteButton">
+                        <a (click)="deletePAC(pac.pseudo, i)" id="deleteButton" title="supprimer">
                             <ion-icon name="trash"></ion-icon>
                         </a>
                     </p>

@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ToastController } from '@ionic/angular';
-import { UserSettings } from '../../../../models/user-settings';
+//import { UserSettings } from '../../../../models/user-settings';
 import { SettingsService } from '../../../../services/settings.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
@@ -12,7 +12,8 @@ import { Router } from '@angular/router';
 })
 export class PacListPage implements OnInit, OnDestroy {
     // VARIABLES +  CONSTR + INIT -------------------------------------------------------------------------------------------------------
-    user: {};
+    // Liste des PAC de l'User
+    pacList: Array<{}>;
     userSetSubscription: Subscription;
 
     constructor(private settingService: SettingsService,
@@ -20,9 +21,10 @@ export class PacListPage implements OnInit, OnDestroy {
                 private router: Router) { }
 
     ngOnInit() {
+        // On recupère la liste des PAC depuis settingService
         this.userSetSubscription = this.settingService.userSettingSubject.subscribe(
-            (userSet: UserSettings) => {
-                this.user = userSet.data;
+            (userSet: any) => {
+                this.pacList = userSet.setup.pacList;
             },
             (error) => {
                 console.log(error);
@@ -40,7 +42,8 @@ export class PacListPage implements OnInit, OnDestroy {
     deletePAC(pacPseudo: string, index: string) {
         this.settingService.deletePAC(+index).then(() => {
             this.displayFlash(pacPseudo + ' a bien été supprimé(e)', 'greenFlashMessage');
-        });
+        },
+        () => { alert('Oups... Une erreur est survenue! Merci de rafraichir la page. Si ce problème persiste n\'hésitez pas nous contacter'); });
     }
     // Ajoute un PAC si le nombre total de PAC du USer est < 3
     onAddPAC() {

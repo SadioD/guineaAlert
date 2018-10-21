@@ -10,7 +10,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 // Services
-import { AuthService } from './services/auth.service';
+import { UserService } from './services/user.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { SettingsService } from './services/settings.service';
 
@@ -34,7 +34,7 @@ import { AppViewComponent } from './app-view/app-view.component';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    AuthService,
+    UserService,
     AuthGuardService,
     SettingsService
   ],

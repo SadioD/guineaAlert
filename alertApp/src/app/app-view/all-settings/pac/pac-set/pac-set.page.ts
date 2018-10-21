@@ -20,7 +20,9 @@ export class PacSetPage implements OnInit {
                 private settingService: SettingsService,
                 private toastController: ToastController) { }
 
-    // Initialise les dépendances de la page
+    // On vérifie si des paramètres ont été recus et on charge le code Jquery de la page
+    // if(Paramètres) => modification de PAC => on recupère le PAC à modifier
+    // ELSE => Add New PAC
     ngOnInit() {
         if (this.reqHasParam()) {
             this.settingService.getUniquePAC(+this.route.snapshot.params['id']).then(
@@ -38,29 +40,28 @@ export class PacSetPage implements OnInit {
         this.loadJqueryCode();
     }// ------------------------------------------------------------------------------------------------------------------------------------
     // METHODES ---------------------------------------------------------------------------------------------------------------------------
-    // Exploite les données à la soumission du formulaire
+    // Traite le formulaire soumis (if(paramètres) => update/ ELSE => add new)
     onSubmit(form: NgForm) {
         if (this.reqHasParam()) {
-            this.settingService.updatePAC(form.value, this.route.snapshot.params['id']).then((response: boolean) => {
+            this.settingService.updatePAC(form.value, this.route.snapshot.params['id']).then(
+            (response: boolean) => {
                 if (!response) {
                     this.displayFlash('Vous devez remplir tous les champs du formulaire', 'redFlashMessage');
                 } else {
                     return this.redirectAndDisplay(form.value.pseudo + ' a bien été modifié(e)', 'greenFlashMessage');
                 }
-            });
+            },
+            (error) => { alert('Oups... Une erreur est survenue! Merci de rafraichir la page. Si ce problème persiste n\'hésitez pas nous contacter'); });
         } else {
             this.settingService.addNewPAC(form.value).then((response: boolean) => {
                 if (!response) {
-                    this.redirectAndDisplay(form.value.pseudo + ' a bien été ajouté(e)', 'greenFlashMessage');
-                } else {
                     this.displayFlash('Vous devez remplir tous les champs du formulaire', 'redFlashMessage');
+                } else {
+                    this.redirectAndDisplay(form.value.pseudo + ' a bien été ajouté(e)', 'greenFlashMessage');
                 }
-            });
+            },
+            (error) => { alert('Oups... Une erreur est survenue! Merci de rafraichir la page. Si ce problème persiste n\'hésitez pas nous contacter'); });
         }
-    }
-    // Premet de vérifier si l'id a été recue: si TRUE=> il s'agit d'un UPDATE si FALSE => il s'agit d'un ADD NEW
-    reqHasParam() {
-        return this.route.snapshot.params['id'] === 'new-pac' ? false : true;
     }// ------------------------------------------------------------------------------------------------------------------------------------
     // EVITE DUPLICATION CODE /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // --------------------------------------------------------------------------------------------------------------------------------------
@@ -88,6 +89,10 @@ export class PacSetPage implements OnInit {
             };
             manager.loadScript();
         });
+    }
+    // Premet de vérifier si l'id a été recue: si TRUE=> il s'agit d'un UPDATE si FALSE => il s'agit d'un ADD NEW
+    reqHasParam() {
+        return this.route.snapshot.params['id'] === 'new-pac' ? false : true;
     }
     // Redirige et affiche un message FLash
     redirectAndDisplay(message: string, customClass: string) {
