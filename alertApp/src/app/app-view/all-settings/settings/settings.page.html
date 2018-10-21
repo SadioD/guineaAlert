@@ -13,7 +13,7 @@
         <ion-item color="dark" class="setItem" *ngFor="let item of settings" [routerLink]="[item.url]" routerDirection="forward">
             <ion-icon slot="start" [name]="item.icon" class="setIcon"></ion-icon>
             <ion-label>
-                <h3>{{item.name}}</h3>
+                <h3>{{item.label}}</h3>
                 <p>{{item.shortDesc}}</p>
             </ion-label>
         </ion-item>

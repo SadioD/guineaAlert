@@ -1,6 +1,9 @@
 export class User {
     constructor(public id: number,
-                public name: string,
+                public pseudo: string,
+                public firstName: string,
                 public email: string,
-                public status: boolean) { }
+                public password: string,
+                public appVersion: string,      // Version Standard ou Premium
+                public status: boolean) { }     // Statut de Connexion
 }

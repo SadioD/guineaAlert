@@ -42,11 +42,19 @@ export class PacSetPage implements OnInit {
     onSubmit(form: NgForm) {
         if (this.reqHasParam()) {
             this.settingService.updatePAC(form.value, this.route.snapshot.params['id']).then((response: boolean) => {
-                if (response) { return this.redirectAndDisplay(form.value.pseudo + ' a bien été modifié(e)', 'greenFlashMessage'); }
+                if (!response) {
+                    this.displayFlash('Vous devez remplir tous les champs du formulaire', 'redFlashMessage');
+                } else {
+                    return this.redirectAndDisplay(form.value.pseudo + ' a bien été modifié(e)', 'greenFlashMessage');
+                }
             });
         } else {
             this.settingService.addNewPAC(form.value).then((response: boolean) => {
-                if (response) { this.redirectAndDisplay(form.value.pseudo + ' a bien été ajouté(e)', 'greenFlashMessage'); }
+                if (!response) {
+                    this.redirectAndDisplay(form.value.pseudo + ' a bien été ajouté(e)', 'greenFlashMessage');
+                } else {
+                    this.displayFlash('Vous devez remplir tous les champs du formulaire', 'redFlashMessage');
+                }
             });
         }
     }
@@ -84,15 +92,19 @@ export class PacSetPage implements OnInit {
     // Redirige et affiche un message FLash
     redirectAndDisplay(message: string, customClass: string) {
         return this.router.navigate(['/settings/pac-list']).then(() => {
-            this.toastController.create({
-                message: message,
-                showCloseButton: true,
-                closeButtonText: 'Fermer',
-                position: 'top',
-                cssClass: customClass
-            }).then((toast: HTMLIonToastElement) => {
-                toast.present();
-            });
+            this.displayFlash(message, customClass);
+        });
+    }
+    // Affiche un Message FLash
+    displayFlash(message: string, customClass: string) {
+        this.toastController.create({
+            message: message,
+            showCloseButton: true,
+            closeButtonText: 'Fermer',
+            position: 'top',
+            cssClass: customClass
+        }).then((toast: HTMLIonToastElement) => {
+            toast.present();
         });
     }// ---------------------------------------------------------------------------------------------------------------------------------
 }
