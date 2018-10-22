@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ToastController } from '@ionic/angular';
-//import { UserSettings } from '../../../../models/user-settings';
 import { SettingsService } from '../../../../services/settings.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
@@ -28,7 +27,7 @@ export class PacListPage implements OnInit, OnDestroy {
             },
             (error) => {
                 console.log(error);
-                this.displayFlash('Oups... Une erreur est survenue! Merci de rafraichir la page. Si ce problème persiste n\'hésitez pas nous contacter', 'redFlashMessage');
+                alert('Oups... Une erreur est survenue! Merci de rafraichir la page. Si ce problème persiste n\'hésitez pas nous contacter');
             }
         );
         this.settingService.emitUserSetSubject();

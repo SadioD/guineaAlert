@@ -9,15 +9,7 @@ import { User } from '../models/user';
 export class UserService {
     // VARIABLES + CONSTR -----------------------------------------------------------------------------------------------------------------
     // Table User (avec les infos personnelles du User)
-    user: User = new User(
-        1,
-        'Ahmed',
-        'DIALLO',
-        'dialloamadou1@yahoo.fr',
-        '********',
-        'standard_version',  // Version de l'App download (Standard : gratuite Ou Premium : Payante)
-        false
-    );
+    user: User;
     // Le Subject de la variable user
     userSubject = new Subject<User>();
 
@@ -32,6 +24,16 @@ export class UserService {
     // Permet de recupérer les données personnelles du User depuis la BDD
     getUserData() {
         // Appel http vers BDD => if (!reponse), consoleLog(error) => reject(false)
+        this.user = new User(
+            1,
+            'Ahmed',
+            'DIALLO',
+            'dialloamadou1@yahoo.fr',
+            '********',
+            'standard_version',  // Version de l'App download (Standard : gratuite Ou Premium : Payante)
+            false
+        );
+        console.log('requete httpclient vers BDD');
     }
     // Permet de modifier les préférences du User
     updateUserPref(userPref: User) {
