@@ -51,7 +51,7 @@ export class PacSetPage implements OnInit {
                     return this.redirectAndDisplay(form.value.pseudo + ' a bien été modifié(e)', 'greenFlashMessage');
                 }
             },
-            (error) => { alert('Oups... Une erreur est survenue! Merci de rafraichir la page. Si ce problème persiste n\'hésitez pas nous contacter'); });
+            () => { alert('Oups... Une erreur est survenue! Merci de rafraichir la page. Si ce problème persiste n\'hésitez pas nous contacter'); });
         } else {
             this.settingService.addNewPAC(form.value).then((response: boolean) => {
                 if (!response) {
@@ -60,7 +60,7 @@ export class PacSetPage implements OnInit {
                     this.redirectAndDisplay(form.value.pseudo + ' a bien été ajouté(e)', 'greenFlashMessage');
                 }
             },
-            (error) => { alert('Oups... Une erreur est survenue! Merci de rafraichir la page. Si ce problème persiste n\'hésitez pas nous contacter'); });
+            () => { alert('Oups... Une erreur est survenue! Merci de rafraichir la page. Si ce problème persiste n\'hésitez pas nous contacter'); });
         }
     }// ------------------------------------------------------------------------------------------------------------------------------------
     // EVITE DUPLICATION CODE /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

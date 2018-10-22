@@ -107,7 +107,7 @@ export class SettingsService {
     // Recupère les paramètres save par L'User connecté dans la BDD (table UserSettings)
     getUserSettings() {
         console.log('requete httpclient vers BDD');
-        sessionStorage.setItem('numberOfPAC', this.userSettings.data.pacList.setup.length);
+        sessionStorage.setItem('numberOfPAC', this.userSettings.setup.pacList.length);
         // RequetehttpClient -> BDD if return false => displayFlash(message, redFlashMessage)
     }
     // Recupère une PAC en fonction de son index

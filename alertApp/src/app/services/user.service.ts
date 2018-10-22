@@ -16,10 +16,10 @@ export class UserService {
         'dialloamadou1@yahoo.fr',
         '********',
         'standard_version',  // Version de l'App download (Standard : gratuite Ou Premium : Payante)
-        true
+        false
     );
     // Le Subject de la variable user
-    userSubject: Subject<User>;
+    userSubject = new Subject<User>();
 
     constructor() {
         this.getUserData();

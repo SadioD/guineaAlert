@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AuthService } from '../services/auth.service';
 import { Subscription } from 'rxjs';
+import { UserService } from '../services/user.service';
 import { User } from '../models/user';
 
 @Component({
@@ -10,7 +10,7 @@ import { User } from '../models/user';
 })
 export class AppViewComponent implements OnInit, OnDestroy {
     // VARIABLES + PAGES de l'APP + CONSTR + INIT ----------------------------------------------------------------------------------------
-    user: User;
+    user: User = new User();
     userSubscription: Subscription;
     public appPages = [
         { title: 'Accueil'      ,  url: '/home'        , icon: 'home' },
@@ -19,11 +19,11 @@ export class AppViewComponent implements OnInit, OnDestroy {
     ];
 
     // Injection de services dans le constructeur
-    constructor(private authService: AuthService) { }
+    constructor(private userService: UserService) { }
 
-    // Initialisation de l'App en liant l'User au subject du Service AuthService
+    // Initialisation de l'App en liant l'User au subject du Service userService
     ngOnInit() {
-        this.userSubscription = this.authService.userSubject.subscribe(
+        this.userSubscription = this.userService.userSubject.subscribe(
             (sessionUser: User) => {
                 this.user = sessionUser;
             },
@@ -31,7 +31,7 @@ export class AppViewComponent implements OnInit, OnDestroy {
                 console.log(error);
             }
         );
-        this.authService.emitUserSubject();
+        this.userService.emitUserSubject();
     }// ---------------------------------------------------------------------------------------------------------------------------------
     // METHODES + DESTROY ----------------------------------------------------------------------------------------------------------------
     // Vérifie l'état de connexion de l'user

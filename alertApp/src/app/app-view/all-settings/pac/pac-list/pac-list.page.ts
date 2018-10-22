@@ -40,10 +40,14 @@ export class PacListPage implements OnInit, OnDestroy {
     // METHODES -------------------------------------------------------------------------------------------------------------------------
     // Supprime un PAC
     deletePAC(pacPseudo: string, index: string) {
-        this.settingService.deletePAC(+index).then(() => {
-            this.displayFlash(pacPseudo + ' a bien été supprimé(e)', 'greenFlashMessage');
-        },
-        () => { alert('Oups... Une erreur est survenue! Merci de rafraichir la page. Si ce problème persiste n\'hésitez pas nous contacter'); });
+        if (sessionStorage.getItem('numberOfPAC') > '1') {
+            this.settingService.deletePAC(+index).then(() => {
+                this.displayFlash(pacPseudo + ' a bien été supprimé(e)', 'greenFlashMessage');
+            },
+                () => { alert('Oups... Une erreur est survenue! Merci de rafraichir la page. Si ce problème persiste n\'hésitez pas nous contacter'); });
+        } else {
+            this.displayFlash('Vous devez avoir au moins un PAC enregistré', 'redFlashMessage');
+        }
     }
     // Ajoute un PAC si le nombre total de PAC du USer est < 3
     onAddPAC() {
