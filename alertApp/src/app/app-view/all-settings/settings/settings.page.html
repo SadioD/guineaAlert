@@ -10,7 +10,7 @@
 <!-- Page content -->
 <ion-content color="dark" padding-top>
     <ion-list>
-        <ion-item color="dark" class="setItem" *ngFor="let item of settingsList" [routerLink]="[item.url]" routerDirection="forward">
+        <ion-item color="dark" class="setItem" *ngFor="let item of appSettings" [routerLink]="[item.url]" routerDirection="forward">
             <ion-icon slot="start" [name]="item.icon" class="setIcon"></ion-icon>
             <ion-label>
                 <h3>{{item.label}}</h3>

@@ -5,28 +5,65 @@ import { Subject } from 'rxjs';
     providedIn: 'root'
 })
 export class SettingsService {
-    // VARIABLES + CONSTR -----------------------------------------------------------------------------------------------------------------
-    // Table UserSettings : Données Stockées au format JSON en BDD (Postgresql)
-    // Contient la liste des paramètres de l'app et leur configuration apportée par l'User
-    // Contient également une colonne faisant référence à la clé extérieure (user_id)
-    // SELECT user_settings.info WHERE user_settings.user_id = 1
+    /* Liste des Tables BDD : Symfony Entities - User, AppSettings, Preferences => this->getUser()->getPreferences()
+            appSettings :       contient la liste des paramètres de l'APP (Gérer les PAC, etc.)
+            userPreferences :   contient la liste des préférences de l'User (liste des PAC, etc.) */
+
+    // Variable contenant la liste des paramètres de l'APP
+    appSettings: Array<{}>;
+
+    // Variable contenant les Préférences de l'User
     userSettings: any;
+
+    // Le Subject de la variable appSettings
+    appSettingSubject = new Subject <Array<{}>>();
+
     // Le Subject de la variable userSettings
     userSettingSubject = new Subject<any>();
 
     constructor() {
-        // this.getAppSettings();
+        this.getAppSettings();
         this.getUserSettings();
     }// ------------------------------------------------------------------------------------------------------------------------------------
     // METHODES ---------------------------------------------------------------------------------------------------------------------------
+    // Emet l'appSettings Subject
+    emitAppSettingSubject() {
+        this.appSettingSubject.next(this.appSettings);
+    }
     // Emet le UserSetting Subject
     emitUserSetSubject() {
         this.userSettingSubject.next(this.userSettings);
     }
+    // Recupère la liste des paramètres de l'APP dans la BDD (Symfony : $entityManager->getEntity(list of AppSettings))
+    getAppSettings() {
+        this.appSettings = [
+            {
+                label: 'Personnes A Contacter (PAC)',
+                shortDesc: 'Modifier votre liste de PAC',
+                longDesc: 'Lorem Ipsum Et quia Mesopotamiae tractus omnes crebro inquietari sueti praetenturis et stationibus servabantur agrariis, laevorsum flexo itinere Osdroenae subsederat extimas partes, novum parumque aliquando temptatum commentum adgressus.quod si impetrasset, fulminis modo cuncta vastarat.erat autem quod cogitabat huius modi.',
+                url: '/settings/pac-list',
+                icon: 'people'
+            },
+            {
+                label: 'Fonction',
+                shortDesc: 'Lorem Ipsum Et quia Mesopotamiae tractus',
+                longDesc: 'Lorem Ipsum Et quia Mesopotamiae tractus omnes crebro inquietari sueti praetenturis et stationibus servabantur agrariis, laevorsum flexo itinere Osdroenae subsederat extimas partes, novum parumque aliquando temptatum commentum adgressus.quod si impetrasset, fulminis modo cuncta vastarat.erat autem quod cogitabat huius modi.',
+                url: '/settings/fonction',
+                icon: 'cog'
+            },
+            {
+                label: 'Autre Fonction',
+                shortDesc: 'Lorem Ipsum Et quia Mesopotamiae tractus',
+                longDesc: 'Lorem Ipsum Et quia Mesopotamiae tractus omnes crebro inquietari sueti praetenturis et stationibus servabantur agrariis, laevorsum flexo itinere Osdroenae subsederat extimas partes, novum parumque aliquando temptatum commentum adgressus.quod si impetrasset, fulminis modo cuncta vastarat.erat autem quod cogitabat huius modi.',
+                url: '/settings/autre-fonction',
+                icon: 'cog'
+            }
+        ];
+    }
     // Recupère les paramètres save par L'User connecté dans la BDD (table UserSettings)
     getUserSettings() {
         this.userSettings = {
-            list: [
+            /*list: [
                 {
                     label: 'Personnes A Contacter (PAC)',
                     shortDesc: 'Modifier votre liste de PAC',
@@ -48,7 +85,7 @@ export class SettingsService {
                     url: '/settings/autre-fonction',
                     icon: 'cog'
                 }
-            ],
+            ],*/
             setup: {
                 pacList: [
                     {

@@ -10,23 +10,23 @@ import { SettingsService } from '../../../services/settings.service';
 export class SettingsPage implements OnInit, OnDestroy {
     // VARIABLES + CONSTR -----------------------------------------------------------------------------------------------------------------
     // Liste des paramètres de l'app
-    settingsList: Array<{}>;
+    appSettings: Array<{}>;
     settingSubscription: Subscription;
 
     constructor(private settingService: SettingsService) { }
 
     ngOnInit() {
         // On recupère la liste des paramètres à afficher depuis settingService
-        this.settingSubscription = this.settingService.userSettingSubject.subscribe(
-           (userSettings: any) => {
-               this.settingsList = userSettings.list;
+        this.settingSubscription = this.settingService.appSettingSubject.subscribe(
+           (settings: Array<{}>) => {
+               this.appSettings = settings;
            },
            (error) => {
                 console.log(error);
                 alert('Oups... Une erreur est survenue! Merci de rafraichir la page. Si ce problème persiste n\'hésitez pas nous contacter');
            }
        );
-       this.settingService.emitUserSetSubject();
+       this.settingService.emitAppSettingSubject();
     }// ------------------------------------------------------------------------------------------------------------------------------------
     // METHODES ---------------------------------------------------------------------------------------------------------------------------
     ngOnDestroy() {
