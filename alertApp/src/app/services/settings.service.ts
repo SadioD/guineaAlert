@@ -1,22 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { AppSettings } from '../models/app-settings';
+import { Pac } from '../models/pac';
 
 @Injectable({
     providedIn: 'root'
 })
 export class SettingsService {
-    /* Liste des Tables BDD : Symfony Entities - User, AppSettings, Preferences => this->getUser()->getPreferences()
+    /* Liste des Tables BDD : Symfony Entities - User, AppSettings, UserSettings => this->getUser()->getUserSettings()
             appSettings :       contient la liste des paramètres de l'APP (Gérer les PAC, etc.)
-            userPreferences :   contient la liste des préférences de l'User (liste des PAC, etc.) */
+            userSettings :      contient la liste des préférences de l'User (liste des PAC, etc.) */
 
     // Variable contenant la liste des paramètres de l'APP
-    appSettings: Array<{}>;
+    appSettings: AppSettings[];
 
     // Variable contenant les Préférences de l'User
     userSettings: any;
 
     // Le Subject de la variable appSettings
-    appSettingSubject = new Subject <Array<{}>>();
+    appSettingSubject = new Subject<AppSettings[]>();
 
     // Le Subject de la variable userSettings
     userSettingSubject = new Subject<any>();
@@ -37,72 +39,52 @@ export class SettingsService {
     // Recupère la liste des paramètres de l'APP dans la BDD (Symfony : $entityManager->getEntity(list of AppSettings))
     getAppSettings() {
         this.appSettings = [
-            {
-                label: 'Personnes A Contacter (PAC)',
-                shortDesc: 'Modifier votre liste de PAC',
-                longDesc: 'Lorem Ipsum Et quia Mesopotamiae tractus omnes crebro inquietari sueti praetenturis et stationibus servabantur agrariis, laevorsum flexo itinere Osdroenae subsederat extimas partes, novum parumque aliquando temptatum commentum adgressus.quod si impetrasset, fulminis modo cuncta vastarat.erat autem quod cogitabat huius modi.',
-                url: '/settings/pac-list',
-                icon: 'people'
-            },
-            {
-                label: 'Fonction',
-                shortDesc: 'Lorem Ipsum Et quia Mesopotamiae tractus',
-                longDesc: 'Lorem Ipsum Et quia Mesopotamiae tractus omnes crebro inquietari sueti praetenturis et stationibus servabantur agrariis, laevorsum flexo itinere Osdroenae subsederat extimas partes, novum parumque aliquando temptatum commentum adgressus.quod si impetrasset, fulminis modo cuncta vastarat.erat autem quod cogitabat huius modi.',
-                url: '/settings/fonction',
-                icon: 'cog'
-            },
-            {
-                label: 'Autre Fonction',
-                shortDesc: 'Lorem Ipsum Et quia Mesopotamiae tractus',
-                longDesc: 'Lorem Ipsum Et quia Mesopotamiae tractus omnes crebro inquietari sueti praetenturis et stationibus servabantur agrariis, laevorsum flexo itinere Osdroenae subsederat extimas partes, novum parumque aliquando temptatum commentum adgressus.quod si impetrasset, fulminis modo cuncta vastarat.erat autem quod cogitabat huius modi.',
-                url: '/settings/autre-fonction',
-                icon: 'cog'
-            }
+            new AppSettings(
+                'Personnes A Contacter (PAC)',
+                'Modifier votre liste de PAC',
+                'Lorem Ipsum Et quia Mesopotamiae tractus omnes crebro inquietari sueti praetenturis et stationibus servabantur agrariis, laevorsum flexo itinere Osdroenae subsederat extimas partes, novum parumque aliquando temptatum commentum adgressus.quod si impetrasset, fulminis modo cuncta vastarat.erat autem quod cogitabat huius modi.',
+                '/settings/pac-list',
+                'people'
+            ),
+            new AppSettings(
+                'Fonction',
+                'Lorem Ipsum Et quia Mesopotamiae tractus',
+                'Lorem Ipsum Et quia Mesopotamiae tractus omnes crebro inquietari sueti praetenturis et stationibus servabantur agrariis, laevorsum flexo itinere Osdroenae subsederat extimas partes, novum parumque aliquando temptatum commentum adgressus.quod si impetrasset, fulminis modo cuncta vastarat.erat autem quod cogitabat huius modi.',
+                '/settings/fonction',
+                'cog'
+            ),
+            new AppSettings(
+                'Autre Fonction non définie',
+                'Lorem Ipsum Et quia Mesopotamiae tractus',
+                'Lorem Ipsum Et quia Mesopotamiae tractus omnes crebro inquietari sueti praetenturis et stationibus servabantur agrariis, laevorsum flexo itinere Osdroenae subsederat extimas partes, novum parumque aliquando temptatum commentum adgressus.quod si impetrasset, fulminis modo cuncta vastarat.erat autem quod cogitabat huius modi.',
+                '/settings/autre-fonction',
+                'cog'
+            )
         ];
     }
     // Recupère les paramètres save par L'User connecté dans la BDD (table UserSettings)
     getUserSettings() {
         this.userSettings = {
-            /*list: [
-                {
-                    label: 'Personnes A Contacter (PAC)',
-                    shortDesc: 'Modifier votre liste de PAC',
-                    longDesc: 'Lorem Ipsum Et quia Mesopotamiae tractus omnes crebro inquietari sueti praetenturis et stationibus servabantur agrariis, laevorsum flexo itinere Osdroenae subsederat extimas partes, novum parumque aliquando temptatum commentum adgressus.quod si impetrasset, fulminis modo cuncta vastarat.erat autem quod cogitabat huius modi.',
-                    url: '/settings/pac-list',
-                    icon: 'people'
-                },
-                {
-                    label: 'Fonction',
-                    shortDesc: 'Lorem Ipsum Et quia Mesopotamiae tractus',
-                    longDesc: 'Lorem Ipsum Et quia Mesopotamiae tractus omnes crebro inquietari sueti praetenturis et stationibus servabantur agrariis, laevorsum flexo itinere Osdroenae subsederat extimas partes, novum parumque aliquando temptatum commentum adgressus.quod si impetrasset, fulminis modo cuncta vastarat.erat autem quod cogitabat huius modi.',
-                    url: '/settings/fonction',
-                    icon: 'cog'
-                },
-                {
-                    label: 'Autre Fonction',
-                    shortDesc: 'Lorem Ipsum Et quia Mesopotamiae tractus',
-                    longDesc: 'Lorem Ipsum Et quia Mesopotamiae tractus omnes crebro inquietari sueti praetenturis et stationibus servabantur agrariis, laevorsum flexo itinere Osdroenae subsederat extimas partes, novum parumque aliquando temptatum commentum adgressus.quod si impetrasset, fulminis modo cuncta vastarat.erat autem quod cogitabat huius modi.',
-                    url: '/settings/autre-fonction',
-                    icon: 'cog'
-                }
-            ],*/
             setup: {
                 pacList: [
-                    {
-                        firstName: 'SOUMARE',
-                        pseudo: 'Fodé Idi',
-                        tel: 664463486
-                    },
-                    {
-                        firstName: 'CONDE',
-                        pseudo: 'Alpha Ibrahim',
-                        tel: 622221239
-                    },
-                    {
-                        firstName: 'DOE',
-                        pseudo: 'John',
-                        tel: 622221239
-                    }
+                    new Pac(
+                        1,
+                        'SOUMARE',
+                        'Fodé Idi',
+                        664463486
+                    ),
+                    new Pac(
+                        2,
+                        'CONDE',
+                        'Alpha Ibrahim',
+                        622221239
+                    ),
+                    new Pac(
+                        3,
+                        'DOE',
+                        'John',
+                        622221239
+                    )
                 ],
                 secondFeat: true,	    // Définit la fonctionnalité comme étant Activée
                 thirdFeat: false	    // Définit la fonctionnalité comme étant Désactivée

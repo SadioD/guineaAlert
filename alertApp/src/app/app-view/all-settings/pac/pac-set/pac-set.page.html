@@ -42,7 +42,7 @@
                                 <ion-item>
                                     <ion-label position="floating" class="formLabel"><strong>Téléphone*</strong></ion-label>
 
-                                    <ion-input type="tel" pattern="6[2-5-6][0-9]{7}" class="formInput" [ngModel]="pac.tel"
+                                    <ion-input type="tel" pattern="6[0-9]{8}" class="formInput" [ngModel]="pac.tel"
                                         name="tel" id="tel" ngModel [required]="pacForm.dirty && pacForm.touched"></ion-input>
                                 </ion-item>
                             </ion-list>

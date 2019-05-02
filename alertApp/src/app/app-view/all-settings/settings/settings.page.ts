@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SettingsService } from '../../../services/settings.service';
+import { AppSettings } from '../../../models/app-settings';
 
 @Component({
   selector: 'app-settings',
@@ -10,7 +11,7 @@ import { SettingsService } from '../../../services/settings.service';
 export class SettingsPage implements OnInit, OnDestroy {
     // VARIABLES + CONSTR -----------------------------------------------------------------------------------------------------------------
     // Liste des paramètres de l'app
-    appSettings: Array<{}>;
+    appSettings: AppSettings[];
     settingSubscription: Subscription;
 
     constructor(private settingService: SettingsService) { }
@@ -18,7 +19,7 @@ export class SettingsPage implements OnInit, OnDestroy {
     ngOnInit() {
         // On recupère la liste des paramètres à afficher depuis settingService
         this.settingSubscription = this.settingService.appSettingSubject.subscribe(
-           (settings: Array<{}>) => {
+           (settings: AppSettings[]) => {
                this.appSettings = settings;
            },
            (error) => {

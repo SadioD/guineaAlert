@@ -1,3 +1,4 @@
+// Entity contenant les données personnelles de l'User
 export class User {
     constructor(public id: number = null,
                 public pseudo: string = null,

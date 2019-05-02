@@ -3,6 +3,7 @@ import { ToastController } from '@ionic/angular';
 import { SettingsService } from '../../../../services/settings.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { Pac } from '../../../../models/pac';
 
 @Component({
   selector: 'app-pac-list',
@@ -12,7 +13,8 @@ import { Router } from '@angular/router';
 export class PacListPage implements OnInit, OnDestroy {
     // VARIABLES +  CONSTR + INIT -------------------------------------------------------------------------------------------------------
     // Liste des PAC de l'User
-    pacList: Array<{}>;
+    //pacList: Array<{}>;
+    pacList: Pac[];
     userSetSubscription: Subscription;
 
     constructor(private settingService: SettingsService,
