@@ -13,7 +13,6 @@ import { Pac } from '../../../../models/pac';
 export class PacListPage implements OnInit, OnDestroy {
     // VARIABLES +  CONSTR + INIT -------------------------------------------------------------------------------------------------------
     // Liste des PAC de l'User
-    //pacList: Array<{}>;
     pacList: Pac[];
     userSetSubscription: Subscription;
 
@@ -21,11 +20,11 @@ export class PacListPage implements OnInit, OnDestroy {
                 private toastController: ToastController,
                 private router: Router) { }
 
+    // On recupère la liste des PAC depuis settingService à l'initialisation de l'App
     ngOnInit() {
-        // On recupère la liste des PAC depuis settingService
         this.userSetSubscription = this.settingService.userSettingSubject.subscribe(
             (userSet: any) => {
-                this.pacList = userSet.setup.pacList;
+                this.pacList = userSet.pacList;
             },
             (error) => {
                 console.log(error);

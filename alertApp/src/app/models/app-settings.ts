@@ -16,13 +16,4 @@ export class AppSettings {
         this.url        = url;
         this.icon       = icon;
     }// ---------------------------------------------------------------------------------------------------------------------
-
-
-/*constructor(
-    public label: string = null,
-    public shortDesc: string = null,
-    public longDesc: string = null,
-    public url: string = null,
-    public icon: string = null
-    ) { }*/
 }
