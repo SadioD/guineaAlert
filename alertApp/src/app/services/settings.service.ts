@@ -48,9 +48,9 @@ export class SettingsService {
             ),
             new AppSettings(
                 'Données Personnelles',
-                'Modifier vos données personnelles',
+                'Modifier ou Supprimez vos données personnelles',
                 'Lorem Ipsum Et quia Mesopotamiae tractus omnes crebro inquietari sueti praetenturis et stationibus servabantur agrariis, laevorsum flexo itinere Osdroenae subsederat extimas partes, novum parumque aliquando temptatum commentum adgressus.quod si impetrasset, fulminis modo cuncta vastarat.erat autem quod cogitabat huius modi.',
-                '/settings/fonction',
+                '/settings/donnees-personnelles',
                 'cog'
             ),
             new AppSettings(

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { User } from '../models/user';
+import { reject } from 'q';
+import { SettingsService } from './settings.service';
 
 
 @Injectable({
@@ -13,7 +15,7 @@ export class UserService {
     // Le Subject de la variable user
     userSubject = new Subject<User>();
 
-    constructor() {
+    constructor(private settingService: SettingsService) {
         this.getUserData();
     }// ------------------------------------------------------------------------------------------------------------------------------------
     // METHODES ---------------------------------------------------------------------------------------------------------------------------
@@ -80,6 +82,26 @@ export class UserService {
     isAuth() {
         return new Promise<boolean>((resolve) => {
             resolve(this.user.status);
+        });
+    }
+    // Supprime le compte de l'User
+    deleteUserData() {
+        return new Promise<boolean>((resolve, reject) => {
+            // Requete HTTP vers BDD
+            this.user.id         = null;
+            this.user.pseudo     = null;
+            this.user.firstName  = null;
+            this.user.email      = null;
+            this.user.password   = null;
+            this.user.appVersion = null;
+            this.user.status     = null;
+
+            // On vide toutes les variables de Session
+            sessionStorage.clear();
+
+            // On supprime toutes les options de l'User
+            this.settingService.userSettings.pacList = null;
+            resolve(true);
         });
     }// ------------------------------------------------------------------------------------------------------------------------------------
     // EVITE DUPLICATION CODE /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

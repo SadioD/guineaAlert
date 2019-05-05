@@ -1,9 +1,66 @@
+<!-- Toolbar -->
 <ion-header>
-  <ion-toolbar>
-    <ion-title>user-data-list</ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="secondary" class="toolbar">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Vos Données Personnelles</ion-title>
+        <ion-buttons slot="end">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-header>
-
-<ion-content padding>
-    jii
+<!-- Page content -->
+<ion-content color="dark" padding-top>
+    <ion-card padding-top>
+        <ion-card-header text-justify class="pacCardHeader">
+            Sur cette page vous pouvez soit modifier vos données personnelles, soit supprimer votre compte
+        </ion-card-header>
+        <ion-card-content text-center padding class="pacCardContent">
+            <ion-row class="pacRows">
+                <ion-col size=12 class="pacCols" text-left>
+                    <h3>Votre Nom</h3>
+                    <p>{{user.firstName}}</p>
+                </ion-col>
+            </ion-row>
+            <ion-row class="pacRows">
+                <ion-col size=12 class="pacCols" text-left>
+                    <h3>Votre Prénom</h3>
+                    <p>{{user.pseudo}}</p>
+                </ion-col>
+            </ion-row>
+            <ion-row class="pacRows">
+                <ion-col size=12 class="pacCols" text-left>
+                    <h3>Votre Email</h3>
+                    <p>{{user.email}}</p>
+                </ion-col>
+            </ion-row>
+            <ion-row class="pacRows">
+                <ion-col size=12 class="pacCols" text-left>
+                    <h3>Votre Mot de Passe</h3>
+                    <p>*****************</p>
+                </ion-col>
+            </ion-row>
+            <ion-row padding-top>
+                <ion-col size=6 class="pacCols" padding-top>
+                    <ion-button expand="block" type="submit" id="updateButton" color="danger" (click)="onUpdateUser()">
+                        <ion-icon slot="start" name="create"></ion-icon>
+                        <strong>Mettre à jour</strong>
+                    </ion-button>
+                </ion-col>
+                <ion-col size=6 class="pacCols" padding-top>
+                    <ion-button expand="block" type="submit" id="deleteButton" color="danger" (click)="onDeleteUser()">
+                        <ion-icon slot="start" name="trash"></ion-icon>
+                        <strong>Supprimer</strong>
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-card-content>
+    </ion-card>
 </ion-content>
+<!-- Footer -->
+<ion-footer>
+    <ion-toolbar color="dark" class="footer" text-center>
+        <ion-title>Copyright All right reserved</ion-title>
+    </ion-toolbar>
+</ion-footer>

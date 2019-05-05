@@ -1,0 +1,31 @@
+// Toolbar AND Footer
+.toolbar {
+    color: var(--ion-color-danger);
+}
+
+.footer {
+    color: rgba(230, 132, 132, 0.4);
+    font-size: 15%;
+}
+// Card Header
+.pacCardHeader {
+    background: var(--ion-color-danger);
+}
+// Card Content
+.pacCardContent {
+    background: var(--ion-color-dark-shade);
+}
+h3 {
+    color: white;
+}
+.pacRows {
+    border-bottom: 1px solid rgb(39, 39, 39);
+}
+.pacRows p {
+    // color: rgba(255, 255, 255, 0.5);
+    color: rgba(230, 132, 132, 0.53);
+    font-size: 80%; 
+}
+#updateButton, #deleteButton  {
+    box-shadow: 0px 1.3px 1.6px 0px black;
+}

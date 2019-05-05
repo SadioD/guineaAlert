@@ -17,7 +17,7 @@ export class AuthPage implements OnInit {
     // Authentifie l'User
     onLogIn() {
         this.userService.logUserIn().then(() => {
-            this.router.navigate(['/home']);
+            this.router.navigate(['/accueil']);
         });
     }// ---------------------------------------------------------------------------------------------------------------------------------
 }
